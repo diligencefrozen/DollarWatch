@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeesung.dollarwatch.exchange.ExchangeMapper">
+    <resultMap type="com.jeesung.dollarwatch.exchange.ExchangeSearchLog" id="searchLogResultMap">
+        <result property="memberId" column="S_MEMBER_ID" />
+        <result property="base" column="S_BASE" />
+        <result property="target" column="S_TARGET" />
+        <result property="rate" column="S_RATE" />
+        <result property="searchedAt" column="S_REG_DATE" />
+    </resultMap>
+
+    <insert id="saveSearchLog" parameterType="com.jeesung.dollarwatch.exchange.ExchangeRate">
+        insert into dollar_search_log (
+            s_no,
+            s_member_id,
+            s_base,
+            s_target,
+            s_rate,
+            s_reg_date
+        ) values (
+            dollar_search_log_seq.nextval,
+            #{memberId},
+            #{base},
+            #{target},
+            #{rate},
+            sysdate
+        )
+    </insert>
+
+    <select id="getRecentSearchLogs" parameterType="String" resultMap="searchLogResultMap">
+        select *
+        from (
+            select *
+            from dollar_search_log
+            where s_member_id = #{value}
+            order by s_no desc
+        )
+        where rownum &lt;= 5
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeesung.dollarwatch.favorite.FavoriteMapper">
+    <insert id="addFavorite" parameterType="com.jeesung.dollarwatch.favorite.Favorite">
+        insert into dollar_favorite (
+            f_no,
+            f_member_id,
+            f_base,
+            f_target,
+            f_memo,
+            f_reg_date
+        ) values (
+            dollar_favorite_seq.nextval,
+            #{f_member_id},
+            #{f_base},
+            #{f_target},
+            #{f_memo},
+            sysdate
+        )
+    </insert>
+
+    <select id="getFavorites" parameterType="String" resultType="com.jeesung.dollarwatch.favorite.Favorite">
+        select *
+        from dollar_favorite
+        where f_member_id = #{value}
+        order by f_reg_date desc
+    </select>
+
+    <select id="countFavorite" parameterType="com.jeesung.dollarwatch.favorite.Favorite" resultType="int">
+        select count(*)
+        from dollar_favorite
+        where f_member_id = #{f_member_id}
+        and f_base = #{f_base}
+        and f_target = #{f_target}
+    </select>
+
+    <delete id="deleteFavorite" parameterType="com.jeesung.dollarwatch.favorite.Favorite">
+        delete from dollar_favorite
+        where f_no = #{f_no}
+        and f_member_id = #{f_member_id}
+    </delete>
+</mapper>

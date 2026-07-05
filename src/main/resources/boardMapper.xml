@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeesung.dollarwatch.board.BoardMapper">
+	<resultMap type="com.jeesung.dollarwatch.board.Board" id="boardResultMap">
+		<id property="b_no" column = "B_NO"></id>
+		<result property="b_title" column="B_TITLE" />
+		<result property="b_content" column="B_CONTENT" />
+		<result property="b_writer" column="B_WRITER" />
+		<result property="b_reg_date" column="B_REG_DATE" />
+		<result property="b_img" column="B_IMG" />
+	</resultMap>
+	<insert id="write" parameterType ="com.jeesung.dollarwatch.board.Board">
+		insert into dollar_board (
+			b_no,
+			b_title,
+			b_content,
+			b_writer,
+			b_img,
+			b_reg_date
+
+		) values (
+			dollar_board_seq.nextval,
+			#{b_title},
+			#{b_content},
+			#{b_writer},
+			#{b_img, jdbcType=VARCHAR},
+			sysdate
+		)
+	</insert>
+	
+	<select id="getBoards" resultMap="boardResultMap" resultType="com.jeesung.dollarwatch.board.Board">
+		select *
+		from dollar_board
+		order by b_no desc
+		
+	</select>
+	
+	<select id="getBoard" parameterType ="java.math.BigDecimal" resultType="com.jeesung.dollarwatch.board.Board" resultMap="boardResultMap">
+		select *
+		from dollar_board
+		where b_no = #{b_no}
+		
+	</select>
+	
+	<delete id="delete" parameterType="com.jeesung.dollarwatch.board.Board" >
+		delete from dollar_board
+		where b_no = #{b_no}
+		and b_writer = #{b_writer}
+	</delete>
+</mapper>

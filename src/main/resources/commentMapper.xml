@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeesung.dollarwatch.board.CommentMapper">
+	<insert id = "write" parameterType="com.jeesung.dollarwatch.board.Comment">
+		insert into dollar_board_comment (
+			c_no,
+			c_b_no,
+			c_writer,
+			c_content,
+			c_date
+		) values (
+			dollar_board_comment_seq.nextval,
+			#{c_b_no},
+			#{c_writer},
+			#{c_content},
+			sysdate
+		)
+	</insert>
+	
+	<select id = "getComments" parameterType="java.math.BigDecimal" resultType="com.jeesung.dollarwatch.board.Comment">
+		select *
+		from dollar_board_comment
+		where c_b_no = #{_parameter}
+		order by c_no desc
+	</select>
+	
+	<delete id="delete" parameterType="com.jeesung.dollarwatch.board.Comment">
+		delete from dollar_board_comment
+		where c_no = #{c_no}
+		and c_writer = #{c_writer}
+	</delete>
+</mapper>
