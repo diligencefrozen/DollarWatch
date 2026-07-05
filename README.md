@@ -106,22 +106,11 @@ Deploy `target/DollarWatch.war` to Tomcat.
 ## Demo account
 
 ```text
-ID: demo
-PW: 1234
+ID: test123    
+PW: 123456
 ```
 
 The demo account is created by `database/schema.sql`.
-
-## Portfolio notes
-
-This repo was reconstructed from Notion development notes. The cleaned final version keeps the portfolio-ready feature set and removes mixed-in lecture examples, old drafts, duplicated mappings, local credentials, and scratch code.
-
-Key finalization decisions:
-
-- Normalized the package namespace to `com.jeesung.dollarwatch`.
-- Completed the final modules: member, exchange, favorite, board, and comments.
-- Added recent search-log retrieval to make the existing `dollar_search_log` table visible in the UI.
-- Added duplicate prevention for favorite currency pairs.
 - Changed destructive actions such as favorite delete and board delete to POST forms.
 - Kept image upload support for board posts and cleans up uploaded files when a post is deleted.
 - Moved DB credentials to `database.properties` and ignored it from Git.
