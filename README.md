@@ -89,8 +89,8 @@ Edit `database.properties`:
 
 ```properties
 db.url=jdbc:oracle:thin:@localhost:1521:xe
-db.username=dollarwatch
-db.password=your_password
+db.username=test123
+db.password=123456
 ```
 
 ### 3. Build
