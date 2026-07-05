@@ -1,0 +1,23 @@
+# Build output
+target/
+*.war
+*.class
+
+# IDE files
+.project
+.classpath
+.settings/
+.metadata/
+.idea/
+*.iml
+
+# Local config
+src/main/resources/database.properties
+
+# Runtime uploads
+src/main/webapp/resources/upload/board/*
+!src/main/webapp/resources/upload/board/.gitkeep
+
+# OS noise
+.DS_Store
+Thumbs.db
